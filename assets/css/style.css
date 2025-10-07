@@ -22,3 +22,18 @@ body {
     background: linear-gradient(180deg, #071023 0%, #0b1220 100%);
     color: #e6eef6
 }
+
+.wrap {
+    width: min(760px, 94%);
+    padding: 24px
+}
+
+/*Header styles*/
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px
+  
+}
