@@ -37,3 +37,21 @@ header {
     margin-bottom: 18px
   
 }
+
+h1 {
+    font-size: 20px;
+    margin: 0
+}
+
+.meta {
+    color: var(--muted);
+    font-size: 13px
+}
+
+/* Card (question area) styles */
+.card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 6px 20px rgba(2, 6, 23, 0.6)
+}
