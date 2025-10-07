@@ -1,0 +1,13 @@
+/* style.css */
+:root {
+    --bg: #0f1724;
+    --card: #0b1220;
+    --accent: #06b6d4;
+    --muted: #94a3b8;
+    --correct: #10b981;
+    --wrong: #ef4444
+}
+
+* {
+    box-sizing: border-box
+}
