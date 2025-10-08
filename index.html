@@ -11,10 +11,10 @@
 <body>
 
 
-<!-- Wrapper for the entire quiz -->
+    <!-- Wrapper for the entire quiz -->
     <div class="wrap">
 
-<!--Header section - shows quiz title and status (score, question number)
+        <!--Header section - shows quiz title and status (score, question number)
 -->
         <header>
             <div>
@@ -27,7 +27,7 @@
             </div>
         </header>
 
-<!--Card section - contains the question, options, feedback, and controls
+        <!--Card section - contains the question, options, feedback, and controls
 -->
 
         <section class="card">
@@ -42,7 +42,7 @@
             <div class="options" id="options"></div>
             <div class="feedback" id="feedback" aria-live="polite"></div>
 
-<!-- Controls: Next/Restart buttons and mode selector -->
+            <!-- Controls: Next/Restart buttons and mode selector -->
             <div class="controls">
                 <button class="btn" id="nextBtn">Start / Next</button>
                 <button class="ghost" id="restartBtn">Restart</button>
@@ -53,13 +53,14 @@
                     <option value="20">20 Qs</option>
                     <option value="0">Endless</option>
                 </select>
-            </div>    
+            </div>
 
-<!-- Footer: tips and extra info -->
- <footer>
-    <div class="small">Tip: click the buttons to answer</div>
+            <!-- Footer: tips and extra info -->
+            <footer>
+                <div class="small">Tip: click the buttons to answer</div>
+                <div class="small">Using emojis for flags</div>
+            </footer>
 
- </footer>
         </section>
     </div>
     <script src="assets/js/script.js"></script>
