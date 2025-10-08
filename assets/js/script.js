@@ -24,3 +24,17 @@ const countries = [
     { name: 'Argentina', flag: '🇦🇷' },
     { name: 'Turkey', flag: '🇹🇷' }
 ];
+
+// DOM elements
+
+const flagEl = document.getElementById('flag'),
+optionsEl = document.getElementById('options'), 
+feedbackEl = document.getElementById('feedback'), 
+scoreEl = document.getElementById('score'), 
+qnumEl = document.getElementById('qnum'), 
+totalEl = document.getElementById('total'), 
+nextBtn = document.getElementById('nextBtn'), 
+restartBtn = document.getElementById('restartBtn'), 
+modeSel = document.getElementById('mode'), 
+timerEl = document.getElementById('timer');
+
