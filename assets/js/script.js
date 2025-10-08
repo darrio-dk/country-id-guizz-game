@@ -38,3 +38,19 @@ restartBtn = document.getElementById('restartBtn'),
 modeSel = document.getElementById('mode'), 
 timerEl = document.getElementById('timer');
 
+// Game state variables
+
+let score = 0, 
+qIndex = 0, totalQ = 10, 
+current = null, timer = null, 
+timeLeft = 15, 
+answering = false;
+
+// Utility: shuffle array
+
+function shuffle(a) { 
+    for (let i = a.length - 1; i > 0; i--) { 
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]] } 
+        return a 
+    }
