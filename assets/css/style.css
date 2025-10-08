@@ -124,6 +124,34 @@ button.opt:hover {
     color: var(--muted)
 }
 
+/* Status and feedback */
+.status {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-weight: 600
+}
+
+.score {
+    padding: 6px 10px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px
+}
+
+.feedback {
+    margin-top: 12px;
+    min-height: 22px
+}
+
+.feedback.correct {
+    color: var(--correct)
+}
+
+.feedback.wrong {
+    color: var(--wrong)
+}
+
+
 
 
 /* Footer styling */
