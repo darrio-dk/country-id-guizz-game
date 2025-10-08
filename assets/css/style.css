@@ -55,3 +55,12 @@ h1 {
     padding: 22px;
     box-shadow: 0 6px 20px rgba(2, 6, 23, 0.6)
 }
+
+.flagBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    font-size: 110px;
+    user-select: none;
+}

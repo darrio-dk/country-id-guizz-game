@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flag ID Guessing Quiz</title>
-    <link rel="stylesheet" href="assets/css/style.css"/>
+    <link rel="stylesheet" href="assets/css/style.css" />
 </head>
+
 <body>
 
-    
-     <!-- Wrapper for the entire quiz -->
- <div class="wrap">
 
-    <!--Header section
-         Shows quiz title and status (score, question number)
+<!-- Wrapper for the entire quiz -->
+    <div class="wrap">
+
+<!--Header section - shows quiz title and status (score, question number)
 -->
         <header>
             <div>
@@ -26,11 +27,10 @@
             </div>
         </header>
 
-        <!--Card section 
-    Contains the question, options, feedback, and controls
+<!--Card section - contains the question, options, feedback, and controls
 -->
 
-<section class="card">
+        <section class="card">
             <div class="question">
                 <div class="flagBox" id="flag">🇺🇳</div>
                 <div style="width:140px; text-align:right">
@@ -38,7 +38,18 @@
                     <div id="timer" style="font-weight:700">--</div>
                 </div>
             </div>
-    
+
+            <div class="options" id="options"></div>
+            <div class="feedback" id="feedback" aria-live="polite"></div>
+
+<!-- Footer: tips and extra info -->
+ <footer>
+    <div class="small">Tip: click the buttons to answer</div>
+
+ </footer>
+        </section>
+    </div>
     <script src="assets/js/script.js"></script>
 </body>
+
 </html>
