@@ -69,12 +69,25 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* come back here to finish styling */
+    gap: 12px;
+    margin-bottom: 12px
 }
 
 
-/* Options (answer buttons)
+/* Options (answer buttons) */
+.options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px
+}
 /* Controls (buttons & mode selector) */
+
+.controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 14px
+}
 
 
 /* Footer styling */
