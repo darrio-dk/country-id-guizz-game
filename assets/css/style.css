@@ -104,6 +104,27 @@ button.opt:hover {
     margin-top: 14px
 }
 
+.small {
+    font-size: 13px;
+    color: var(--muted)
+}
+
+.btn {
+    background: var(--accent);
+    border: none;
+    color: #042028;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer
+}
+
+.ghost {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: var(--muted)
+}
+
+
 
 /* Footer styling */
 footer {
@@ -113,4 +134,16 @@ footer {
     align-items: center;
     color: var(--muted);
     font-size: 13px
+}
+
+/* Media responsive desing */
+@media (max-width:520px) {
+    .flagBox {
+        height: 140px;
+        font-size: 72px
+    }
+
+    .options {
+        grid-template-columns: 1fr
+    }
 }
