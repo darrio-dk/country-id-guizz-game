@@ -64,3 +64,9 @@ h1 {
     font-size: 110px;
     user-select: none;
 }
+
+.question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
