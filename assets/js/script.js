@@ -46,6 +46,10 @@ current = null, timer = null,
 timeLeft = 15, 
 answering = false;
 
+// Create a fresh shuffled pool for each game and avoid repeats
+
+let questionPool = [];
+
 // Utility: shuffle array
 
 function shuffle(a) { 
@@ -55,14 +59,27 @@ function shuffle(a) {
         return a 
     }
 
+// Build a new question pool (replaces old random picking option)
+
+function buildQuestionPool() {
+    totalQ = parseInt(modeSel.value, 10);   // 10 or 20
+    questionPool = shuffle([...countries]).slice(0, totalQ);
+
+    qIndex = 0;
+    qnumEl.textContent = 0;
+    totalEl.textContent = totalQ;
+}
+
 // Pick a new question with options
 
-function pickQuestion() { 
-    const correct = countries[Math.floor(Math.random() * countries.length)], 
-    others = shuffle(countries.filter(c => c.name !== correct.name)).slice(0, 3), 
-    opts = shuffle([correct, ...others]); 
-    return { correct, opts } 
-}
+// function pickQuestion() { 
+//     const correct = countries[Math.floor(Math.random() * countries.length)], 
+//     others = shuffle(countries.filter(c => c.name !== correct.name)).slice(0, 3), 
+//     opts = shuffle([correct, ...others]); 
+//     return { correct, opts } 
+// }
+
+
 
 // Render the current question
 
