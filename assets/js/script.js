@@ -121,7 +121,7 @@ function pickQuestion() {
 // Render question (new code)
 
 function renderQuestion() {
-    
+
     // End of quiz
     if (qIndex >= totalQ) {
         feedbackEl.className = 'feedback';
@@ -135,7 +135,32 @@ function renderQuestion() {
         return;
     }
 
+    current = pickQuestion();
+    flagEl.textContent = current.flag;
+    optionsEl.innerHTML = '';
 
+    const others = shuffle(
+        countries.filter(c => c.name !== current.name)
+    ).slice(0, 3);
+
+    const opts = shuffle([current, ...others]);
+
+    opts.forEach((opt, i) => {
+        const b = document.createElement('button');
+        b.className = 'opt';
+        b.dataset.name = opt.name;
+        b.innerHTML = `<div style="font-weight:700">${i + 1}. ${opt.name}</div>`;
+        b.addEventListener('click', () => selectAnswer(opt.name, b));
+        optionsEl.appendChild(b);
+    });
+
+    qIndex++;
+    qnumEl.textContent = qIndex;
+    feedbackEl.textContent = '';
+    nextBtn.disabled = true;
+    answering = true;
+    startTimer();
+}
 
 // Handle answer selection
       function selectAnswer(name, btn) { 
@@ -178,31 +203,70 @@ function startTimer() {
 
 
 // Start/restart the game
-function startGame() { 
-    score = 0; 
-    qIndex = 0; 
-    scoreEl.textContent = score; 
-    totalQ = parseInt(modeSel.value, 10); 
-    totalEl.textContent = totalQ === 0 ? '∞' : totalQ; nextBtn.textContent = 'Next'; 
-    renderQuestion() 
-}
-    nextBtn.addEventListener('click', () => { 
-        if (nextBtn.textContent === 'Restart') { startGame(); 
-            return 
-        } 
-            if (answering) { clearInterval(timer); 
-                answering = false; 
-                feedbackEl.className = 'feedback wrong'; 
-                feedbackEl.textContent = `Skipped — correct: ${current.correct.name}`;
-                [...optionsEl.children].forEach(b => { 
-                    if (b.dataset.name === current.correct.name) b.style.borderColor = 'rgba(16,185,129,0.9)' }); 
+// function startGame() { 
+//     score = 0; 
+//     qIndex = 0; 
+//     scoreEl.textContent = score; 
+//     totalQ = parseInt(modeSel.value, 10); 
+//     totalEl.textContent = totalQ === 0 ? '∞' : totalQ; nextBtn.textContent = 'Next'; 
+//     renderQuestion() 
+// }
 
-                    nextBtn.textContent = (totalQ !== 0 && qIndex >= totalQ) ? 'See results' : 'Next'; 
-                    nextBtn.disabled = false; 
-                    return 
-                } 
-                renderQuestion(); 
-            });
+function startGame() {
+    score = 0;
+    scoreEl.textContent = 0;
+    answering = false;
+
+    buildQuestionPool(); // applies mode immediately (fixed)
+    nextBtn.textContent = 'Next';
+
+    renderQuestion();
+}
+
+    // nextBtn.addEventListener('click', () => { 
+    //     if (nextBtn.textContent === 'Restart') { startGame(); 
+    //         return 
+    //     } 
+    //         if (answering) { clearInterval(timer); 
+    //             answering = false; 
+    //             feedbackEl.className = 'feedback wrong'; 
+    //             feedbackEl.textContent = `Skipped — correct: ${current.correct.name}`;
+    //             [...optionsEl.children].forEach(b => { 
+    //                 if (b.dataset.name === current.correct.name) b.style.borderColor = 'rgba(16,185,129,0.9)' }); 
+
+    //                 nextBtn.textContent = (totalQ !== 0 && qIndex >= totalQ) ? 'See results' : 'Next'; 
+    //                 nextBtn.disabled = false; 
+    //                 return 
+    //             } 
+    //             renderQuestion(); 
+    //         });
+
+    nextBtn.addEventListener('click', () => {
+
+    if (nextBtn.textContent === 'Restart' || qIndex === 0) {
+        startGame();
+        return;
+    }
+
+    if (answering) {
+        clearInterval(timer);
+        answering = false;
+
+        feedbackEl.className = 'feedback wrong';
+        feedbackEl.textContent = `Skipped — correct: ${current.name}`;
+
+        [...optionsEl.children].forEach(b => {
+            if (b.dataset.name === current.name) {
+                b.style.borderColor = 'rgba(16,185,129,0.9)';
+            }
+        });
+
+        nextBtn.disabled = false;
+        return;
+    }
+
+    renderQuestion();
+});
 
 restartBtn.addEventListener('click', () => startGame());
 
