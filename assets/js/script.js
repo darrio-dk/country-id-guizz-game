@@ -79,38 +79,63 @@ function buildQuestionPool() {
 //     return { correct, opts } 
 // }
 
+// pick next question from pool without repetition
 
+function pickQuestion() {
+    return questionPool[qIndex];
+}
 
 // Render the current question
 
-function renderQuestion() { 
-    if (totalQ !== 0 && qIndex >= totalQ) { 
-        feedbackEl.className = 'feedback'; feedbackEl.textContent = `Finished! Your score: ${score} / ${totalQ}`; 
-        flagEl.textContent = '🏁'; 
-        optionsEl.innerHTML = ''; 
-        nextBtn.textContent = 'Restart'; 
-        answering = false; 
-        clearInterval(timer); 
-        timerEl.textContent = '--'; return } 
+// function renderQuestion() { 
+//     if (totalQ !== 0 && qIndex >= totalQ) { 
+//         feedbackEl.className = 'feedback'; feedbackEl.textContent = `Finished! Your score: ${score} / ${totalQ}`; 
+//         flagEl.textContent = '🏁'; 
+//         optionsEl.innerHTML = ''; 
+//         nextBtn.textContent = 'Restart'; 
+//         answering = false; 
+//         clearInterval(timer); 
+//         timerEl.textContent = '--'; return } 
         
-        current = pickQuestion(); 
-        flagEl.textContent = current.correct.flag; 
-        optionsEl.innerHTML = ''; 
+//         current = pickQuestion(); 
+//         flagEl.textContent = current.correct.flag; 
+//         optionsEl.innerHTML = ''; 
+
+
         
-  // Render options buttons        
-        current.opts.forEach((opt, i) => { 
-            const b = document.createElement('button'); 
-            b.className = 'opt'; 
-            b.dataset.name = opt.name; 
-            b.innerHTML = `<div style="font-weight:700">${i + 1}. ${opt.name}</div>`; 
-            b.addEventListener('click', () => selectAnswer(opt.name, b)); 
-            optionsEl.appendChild(b) 
-        }); 
-            qIndex++; qnumEl.textContent = qIndex; 
-            feedbackEl.textContent = ''; 
-            nextBtn.disabled = true; 
-            answering = true; startTimer() 
-        }
+//   // Render options buttons        
+//         current.opts.forEach((opt, i) => { 
+//             const b = document.createElement('button'); 
+//             b.className = 'opt'; 
+//             b.dataset.name = opt.name; 
+//             b.innerHTML = `<div style="font-weight:700">${i + 1}. ${opt.name}</div>`; 
+//             b.addEventListener('click', () => selectAnswer(opt.name, b)); 
+//             optionsEl.appendChild(b) 
+//         }); 
+//             qIndex++; qnumEl.textContent = qIndex; 
+//             feedbackEl.textContent = ''; 
+//             nextBtn.disabled = true; 
+//             answering = true; startTimer() 
+//         }
+
+// Render question (new code)
+
+function renderQuestion() {
+    
+    // End of quiz
+    if (qIndex >= totalQ) {
+        feedbackEl.className = 'feedback';
+        feedbackEl.textContent = `Finished! Your score: ${score} / ${totalQ}`;
+        flagEl.textContent = '🏁';
+        optionsEl.innerHTML = '';
+        nextBtn.textContent = 'Restart';
+        answering = false;
+        clearInterval(timer);
+        timerEl.textContent = '--';
+        return;
+    }
+
+
 
 // Handle answer selection
       function selectAnswer(name, btn) { 
