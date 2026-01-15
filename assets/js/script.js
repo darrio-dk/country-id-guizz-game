@@ -166,7 +166,7 @@ function renderQuestion() {
       function selectAnswer(name, btn) { 
     if (!answering) return; answering = false; 
     clearInterval(timer); 
-    const correctName = current.correct.name;
+    
 
         if (name === correctName) { 
             score++; scoreEl.textContent = score; 
@@ -179,8 +179,7 @@ function renderQuestion() {
                 [...optionsEl.children].forEach(b => { 
                     if (b.dataset.name === correctName) b.style.borderColor = 'rgba(16,185,129,0.9)' }) 
                 } 
-        nextBtn.disabled = false; 
-        nextBtn.textContent = (totalQ !== 0 && qIndex >= totalQ) ? 'See results' : 'Next' 
+        nextBtn.disabled = false;  
         }
 
 // Timer for each question
@@ -194,11 +193,14 @@ function startTimer() {
         if (timeLeft <= 0) { clearInterval(timer); 
             answering = false; 
             feedbackEl.className = 'feedback wrong'; 
-            feedbackEl.textContent = `Time! correct: ${current.correct.name}`;
+            feedbackEl.textContent = `Time! correct: ${current.name}`;
             [...optionsEl.children].forEach(b => { 
-                if (b.dataset.name === current.correct.name) b.style.borderColor = 'rgba(16,185,129,0.9)' }); 
-                nextBtn.disabled = false; 
-                nextBtn.textContent = (totalQ !== 0 && qIndex >= totalQ) ? 'See results' : 'Next' } }, 1000) 
+                if (b.dataset.name === current.name) {b.style.borderColor = 'rgba(16,185,129,0.9)';
+                }
+            }); 
+            
+            nextBtn.disabled = false; }}, 1000); 
+                
             }
 
 
