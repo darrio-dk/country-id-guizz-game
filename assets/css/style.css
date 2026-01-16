@@ -175,3 +175,25 @@ footer {
         grid-template-columns: 1fr
     }
 }
+
+@media (max-width: 360px) {
+    .controls {
+        flex-wrap: wrap;
+    }
+
+    select#mode {
+        max-width: 100%;
+        width: 100%;
+        margin-top: 6px;
+    }
+
+     .question {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
