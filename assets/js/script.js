@@ -27,25 +27,25 @@ const countries = [
 
 // DOM elements
 
-const flagEl = document.getElementById('flag'); 
-const optionsEl = document.getElementById('options'); 
-const feedbackEl = document.getElementById('feedback'); 
-const scoreEl = document.getElementById('score'); 
-const qnumEl = document.getElementById('qnum'); 
-const totalEl = document.getElementById('total'); 
-const nextBtn = document.getElementById('nextBtn'); 
-const restartBtn = document.getElementById('restartBtn'); 
-const modeSel = document.getElementById('mode'); 
+const flagEl = document.getElementById('flag');
+const optionsEl = document.getElementById('options');
+const feedbackEl = document.getElementById('feedback');
+const scoreEl = document.getElementById('score');
+const qnumEl = document.getElementById('qnum');
+const totalEl = document.getElementById('total');
+const nextBtn = document.getElementById('nextBtn');
+const restartBtn = document.getElementById('restartBtn');
+const modeSel = document.getElementById('mode');
 const timerEl = document.getElementById('timer');
 
 // Game state variables
 
-let score = 0; 
-let qIndex = 0; 
-let totalQ = 10; 
-let current = null; 
-let timer = null; 
-let timeLeft = 15; 
+let score = 0;
+let qIndex = 0;
+let totalQ = 10;
+let current = null;
+let timer = null;
+let timeLeft = 15;
 let answering = false;
 
 // Create a fresh shuffled pool for each game and avoid repeats
@@ -54,12 +54,13 @@ let questionPool = [];
 
 // Utility: shuffle array
 
-function shuffle(a) { 
-    for (let i = a.length - 1; i > 0; i--) { 
+function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]] } 
-        return a 
+        [a[i], a[j]] = [a[j], a[i]]
     }
+    return a
+}
 
 // Build a new question pool (replaces old random picking option)
 
@@ -125,45 +126,54 @@ function renderQuestion() {
 }
 
 // Handle answer selection
-      function selectAnswer(name, btn) { 
-    if (!answering) return; answering = false; 
-    clearInterval(timer); 
-    
+function selectAnswer(name, btn) {
+    if (!answering) return;
 
-        if (name === current.name) { 
-            score++; scoreEl.textContent = score; 
-            feedbackEl.className = 'feedback correct'; 
-            feedbackEl.textContent = 'Correct! 🎉'; 
-            btn.style.borderColor = 'rgba(16,185,129,0.9)' 
-        } else {feedbackEl.className = 'feedback wrong'; 
-                feedbackEl.textContent = `Wrong — correct answer: ${current.name}`; 
-                btn.style.borderColor = 'rgba(239,68,68,0.9)';
-                [...optionsEl.children].forEach(b => { 
-                    if (b.dataset.name === current.name) b.style.borderColor = 'rgba(16,185,129,0.9)' }) 
-                } 
-        nextBtn.disabled = false;  
-        }
+    answering = false;
+    clearInterval(timer);
+
+
+    if (name === current.name) {
+        score++; scoreEl.textContent = score;
+        feedbackEl.className = 'feedback correct';
+        feedbackEl.textContent = 'Correct! 🎉';
+        btn.style.borderColor = 'rgba(16,185,129,0.9)'
+    } else {
+        feedbackEl.className = 'feedback wrong';
+        feedbackEl.textContent = `Wrong — correct answer: ${current.name}`;
+        btn.style.borderColor = 'rgba(239,68,68,0.9)';
+        [...optionsEl.children].forEach(b => {
+            if (b.dataset.name === current.name) b.style.borderColor = 'rgba(16,185,129,0.9)'
+        })
+    }
+    nextBtn.disabled = false;
+}
 
 // Timer for each question
-function startTimer() { 
-    clearInterval(timer); 
-    timeLeft = 15; 
-    timerEl.textContent = `${timeLeft}s`; 
+function startTimer() {
+    clearInterval(timer);
+    timeLeft = 15;
+    timerEl.textContent = `${timeLeft}s`;
 
-    timer = setInterval(() => { timeLeft--; 
-    timerEl.textContent = `${timeLeft}s`; 
-        if (timeLeft <= 0) { clearInterval(timer); 
-            answering = false; 
-            feedbackEl.className = 'feedback wrong'; 
+    timer = setInterval(() => {
+        timeLeft--;
+        timerEl.textContent = `${timeLeft}s`;
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            answering = false;
+            feedbackEl.className = 'feedback wrong';
             feedbackEl.textContent = `Time! correct: ${current.name}`;
-            [...optionsEl.children].forEach(b => { 
-                if (b.dataset.name === current.name) {b.style.borderColor = 'rgba(16,185,129,0.9)';
+            [...optionsEl.children].forEach(b => {
+                if (b.dataset.name === current.name) {
+                    b.style.borderColor = 'rgba(16,185,129,0.9)';
                 }
-            }); 
-            
-            nextBtn.disabled = false; }}, 1000); 
-                
-            }
+            });
+
+            nextBtn.disabled = false;
+        }
+    }, 1000);
+
+}
 
 
 
@@ -178,9 +188,9 @@ function startGame() {
     renderQuestion();
 }
 
-    
 
-    nextBtn.addEventListener('click', () => {
+
+nextBtn.addEventListener('click', () => {
 
     if (nextBtn.textContent === 'Restart' || qIndex === 0) {
         startGame();
