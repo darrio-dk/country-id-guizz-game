@@ -27,24 +27,26 @@ const countries = [
 
 // DOM elements
 
-const flagEl = document.getElementById('flag'), 
-optionsEl = document.getElementById('options'), 
-feedbackEl = document.getElementById('feedback'), 
-scoreEl = document.getElementById('score'), 
-qnumEl = document.getElementById('qnum'), 
-totalEl = document.getElementById('total'), 
-nextBtn = document.getElementById('nextBtn'), 
-restartBtn = document.getElementById('restartBtn'), 
-modeSel = document.getElementById('mode'), 
-timerEl = document.getElementById('timer');
+const flagEl = document.getElementById('flag'); 
+const optionsEl = document.getElementById('options'); 
+const feedbackEl = document.getElementById('feedback'); 
+const scoreEl = document.getElementById('score'); 
+const qnumEl = document.getElementById('qnum'); 
+const totalEl = document.getElementById('total'); 
+const nextBtn = document.getElementById('nextBtn'); 
+const restartBtn = document.getElementById('restartBtn'); 
+const modeSel = document.getElementById('mode'); 
+const timerEl = document.getElementById('timer');
 
 // Game state variables
 
-let score = 0, 
-qIndex = 0, totalQ = 10, 
-current = null, timer = null, 
-timeLeft = 15, 
-answering = false;
+let score = 0; 
+let qIndex = 0; 
+let totalQ = 10; 
+let current = null; 
+let timer = null; 
+let timeLeft = 15; 
+let answering = false;
 
 // Create a fresh shuffled pool for each game and avoid repeats
 
@@ -70,14 +72,6 @@ function buildQuestionPool() {
     totalEl.textContent = totalQ;
 }
 
-// Pick a new question with options
-
-// function pickQuestion() { 
-//     const correct = countries[Math.floor(Math.random() * countries.length)], 
-//     others = shuffle(countries.filter(c => c.name !== correct.name)).slice(0, 3), 
-//     opts = shuffle([correct, ...others]); 
-//     return { correct, opts } 
-// }
 
 // pick next question from pool without repetition
 
@@ -85,38 +79,6 @@ function pickQuestion() {
     return questionPool[qIndex];
 }
 
-// Render the current question
-
-// function renderQuestion() { 
-//     if (totalQ !== 0 && qIndex >= totalQ) { 
-//         feedbackEl.className = 'feedback'; feedbackEl.textContent = `Finished! Your score: ${score} / ${totalQ}`; 
-//         flagEl.textContent = '🏁'; 
-//         optionsEl.innerHTML = ''; 
-//         nextBtn.textContent = 'Restart'; 
-//         answering = false; 
-//         clearInterval(timer); 
-//         timerEl.textContent = '--'; return } 
-        
-//         current = pickQuestion(); 
-//         flagEl.textContent = current.correct.flag; 
-//         optionsEl.innerHTML = ''; 
-
-
-        
-//   // Render options buttons        
-//         current.opts.forEach((opt, i) => { 
-//             const b = document.createElement('button'); 
-//             b.className = 'opt'; 
-//             b.dataset.name = opt.name; 
-//             b.innerHTML = `<div style="font-weight:700">${i + 1}. ${opt.name}</div>`; 
-//             b.addEventListener('click', () => selectAnswer(opt.name, b)); 
-//             optionsEl.appendChild(b) 
-//         }); 
-//             qIndex++; qnumEl.textContent = qIndex; 
-//             feedbackEl.textContent = ''; 
-//             nextBtn.disabled = true; 
-//             answering = true; startTimer() 
-//         }
 
 // Render question (new code)
 
@@ -168,16 +130,16 @@ function renderQuestion() {
     clearInterval(timer); 
     
 
-        if (name === correctName) { 
+        if (name === current.name) { 
             score++; scoreEl.textContent = score; 
             feedbackEl.className = 'feedback correct'; 
             feedbackEl.textContent = 'Correct! 🎉'; 
             btn.style.borderColor = 'rgba(16,185,129,0.9)' 
         } else {feedbackEl.className = 'feedback wrong'; 
-                feedbackEl.textContent = `Wrong — correct answer: ${correctName}`; 
+                feedbackEl.textContent = `Wrong — correct answer: ${current.name}`; 
                 btn.style.borderColor = 'rgba(239,68,68,0.9)';
                 [...optionsEl.children].forEach(b => { 
-                    if (b.dataset.name === correctName) b.style.borderColor = 'rgba(16,185,129,0.9)' }) 
+                    if (b.dataset.name === current.name) b.style.borderColor = 'rgba(16,185,129,0.9)' }) 
                 } 
         nextBtn.disabled = false;  
         }
@@ -204,15 +166,6 @@ function startTimer() {
             }
 
 
-// Start/restart the game
-// function startGame() { 
-//     score = 0; 
-//     qIndex = 0; 
-//     scoreEl.textContent = score; 
-//     totalQ = parseInt(modeSel.value, 10); 
-//     totalEl.textContent = totalQ === 0 ? '∞' : totalQ; nextBtn.textContent = 'Next'; 
-//     renderQuestion() 
-// }
 
 function startGame() {
     score = 0;
@@ -225,23 +178,7 @@ function startGame() {
     renderQuestion();
 }
 
-    // nextBtn.addEventListener('click', () => { 
-    //     if (nextBtn.textContent === 'Restart') { startGame(); 
-    //         return 
-    //     } 
-    //         if (answering) { clearInterval(timer); 
-    //             answering = false; 
-    //             feedbackEl.className = 'feedback wrong'; 
-    //             feedbackEl.textContent = `Skipped — correct: ${current.correct.name}`;
-    //             [...optionsEl.children].forEach(b => { 
-    //                 if (b.dataset.name === current.correct.name) b.style.borderColor = 'rgba(16,185,129,0.9)' }); 
-
-    //                 nextBtn.textContent = (totalQ !== 0 && qIndex >= totalQ) ? 'See results' : 'Next'; 
-    //                 nextBtn.disabled = false; 
-    //                 return 
-    //             } 
-    //             renderQuestion(); 
-    //         });
+    
 
     nextBtn.addEventListener('click', () => {
 
@@ -270,9 +207,5 @@ function startGame() {
     renderQuestion();
 });
 
-restartBtn.addEventListener('click', () => startGame());
+restartBtn.addEventListener('click', startGame);
 
-    totalEl.textContent = totalQ; 
-    qnumEl.textContent = 0; 
-    scoreEl.textContent = 0; 
-    timerEl.textContent = '--';
