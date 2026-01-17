@@ -57,9 +57,9 @@ let questionPool = [];
 function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]]
+        [a[i], a[j]] = [a[j], a[i]];
     }
-    return a
+    return a;
 }
 
 // Build a new question pool (replaces old random picking option)
@@ -137,14 +137,14 @@ function selectAnswer(name, btn) {
         score++; scoreEl.textContent = score;
         feedbackEl.className = 'feedback correct';
         feedbackEl.textContent = 'Correct! 🎉';
-        btn.style.borderColor = 'rgba(16,185,129,0.9)'
+        btn.style.borderColor = 'rgba(16,185,129,0.9)';
     } else {
         feedbackEl.className = 'feedback wrong';
         feedbackEl.textContent = `Wrong — correct answer: ${current.name}`;
         btn.style.borderColor = 'rgba(239,68,68,0.9)';
         [...optionsEl.children].forEach(b => {
-            if (b.dataset.name === current.name) b.style.borderColor = 'rgba(16,185,129,0.9)'
-        })
+            if (b.dataset.name === current.name) b.style.borderColor = 'rgba(16,185,129,0.9)';
+        });
     }
     nextBtn.disabled = false;
 }
